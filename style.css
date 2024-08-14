@@ -103,6 +103,7 @@ footer{
   flex-wrap: wrap;
   gap: 50px;
   padding: 50px;
+  justify-content: center;
 }
 footer aside{
   display: flex;
@@ -110,6 +111,9 @@ footer aside{
   flex-wrap: wrap;
   gap: 20px;
   max-width: 300px;
+  text-align: center;
+  align-items: center;
+
 }
 
 footer p a{
