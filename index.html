@@ -23,8 +23,12 @@
             <option value="webp">WEBP</option>
             <option value="jpeg">JPEG</option>
             <option value="png">PNG</option>
+            <option value="bmp">BMP</option>
+            <option value="gif">GIF</option>
+            <- value="raw">RAW</->
+            <option value="tiff">TIFF</option>
         </select>
-        <span>
+        <span class="buttonContainer">
           <button type="submit">Submit</button>
           <button type="reset" id="resetButton">Reset</button>
         </span>
@@ -109,12 +113,38 @@
                       canvas.width = img.width;
                       canvas.height = img.height;
                       ctx.drawImage(img, 0, 0);
+                      let mimeType;
+                      switch (compressionType) {
+                          case 'webp':
+                              mimeType = 'image/webp';
+                              break;
+                          case 'jpeg':
+                              mimeType = 'image/jpeg';
+                              break;
+                          case 'png':
+                              mimeType = 'image/png';
+                              break;
+                          case 'bmp':
+                              mimeType = 'image/bmp';
+                              break;
+                          case 'gif':
+                              mimeType = 'image/gif';
+                              break;
+                          case 'raw':
+                              mimeType = 'image/raw';
+                              break;
+                          case 'tiff':
+                              mimeType = 'image/tiff';
+                              break;
+                          default:
+                              mimeType = 'image/png';
+                      }
                       canvas.toBlob((blob) => {
                           const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, `.${compressionType}`), {
-                              type: `image/${compressionType}`
+                              type: mimeType
                           });
                           resolve(compressedFile);
-                      }, `image/${compressionType}`);
+                      }, mimeType);
                   };
                   img.src = e.target.result;
               };

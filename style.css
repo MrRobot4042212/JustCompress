@@ -61,6 +61,39 @@ a{
   text-decoration: none;
 }
 
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(to bottom, #131522 , rgba(0, 0, 255, 0.1) );
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.5s ease;
+
+}
+select{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  border: rgb(4, 5, 191) 1px solid;
+  background: transparent;
+}
+option{
+  color: #000;
+}
+
+button:hover {
+  background:rgba(0, 0, 255, 0.3);
+  transform: scale(1.05);
+}
+.buttonContainer{
+  display: flex;
+  gap: 20px;
+}
+
+
 
 
 
