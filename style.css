@@ -158,7 +158,7 @@ html{
       max-width: 100%;
       height: 200px;
       object-fit: cover;
-      
+      margin-top: 5px;
   }
   .title{
     font-size: 45px;
@@ -192,6 +192,11 @@ html{
     display: flex;
     gap: 20px;
     margin: 0px 10px;
+    position: sticky;
+    bottom: 0;
+    background-color: transparent;
+    backdrop-filter: blur(30px);
+    padding: 20px 10px;
   }
   .imgContainer{
     display: flex;
@@ -425,28 +430,27 @@ html{
     width: 800px;
     min-height: 250px;
     max-height: 350px;
-    overflow: scroll;
+    overflow-y: scroll;
     scrollbar-color: transparent transparent;
     border: 2px dashed rgb(204, 204, 204, 1);
     border-radius: 10px;
     padding: 10px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
     text-align: center;
     margin: 20px auto;
     cursor: pointer;
-    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   .drop-zone.dragover {
       border-color: #000;
   }
   .drop-zone img {
-      max-width: 150px;
-      max-height: 150px;
+      max-width: 300px;
+      max-height: 300px;
       object-fit: cover;
+      margin: 5px;
   }
   .drop-zone span{
     display: flex;
