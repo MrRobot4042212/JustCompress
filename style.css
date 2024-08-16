@@ -34,6 +34,8 @@ html{
     align-content: center;
     gap: 20px;
   }
+
+
   
   .content{
     display: flex;
@@ -121,7 +123,13 @@ html{
     color: #fff;
     cursor: pointer;
     transition: all 0.5s ease;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
+
   select{
     padding: 10px 20px;
     border: none;
@@ -156,7 +164,34 @@ html{
     height: 100%;
     object-fit: cover;
     filter: saturate(50%);
-  
+  }
+  .compression-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position:absolute;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px) saturate(80%);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+    opacity: 0;
+    top: 0;
+  }
+  li{
+    list-style: none;
+    margin: 5px;
+    font-size: 20px;
+    color: #000;
+  }
+  ul{
+    padding: 0;
+    text-align: start;
+    margin: auto;
+    max-width: 700px;
   }
   footer{
     display: flex;
@@ -325,6 +360,10 @@ html{
     color: #fff;
     cursor: pointer;
     transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
   select{
     padding: 10px 20px;
@@ -339,8 +378,8 @@ html{
     color: #000;
   }
   button:hover {
-    background:rgba(0, 0, 255, 0.3);
-    transform: scale(1.05);
+    background: rgba(0, 0, 255, 1);
+    transform: scale(1.02);
   }
   .buttonContainer{
     display: flex;
@@ -360,8 +399,35 @@ html{
     height: 100%;
     object-fit: cover;
     filter: saturate(50%);
-  
   }
+  .compression-info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position:absolute;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px) saturate(80%);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+  li{
+    list-style: none;
+    margin: 5px;
+    font-size: 20px;
+    color: #000;
+  }
+  ul{
+    padding: 0;
+    text-align: start;
+    margin: auto;
+    max-width: 700px;
+  }
+
   footer{
     display: flex;
     flex-direction: row;
@@ -400,6 +466,11 @@ html{
     fill: rgb(83, 51, 210);
   
   }
+
+  span span{
+    text-align: center;
+    cursor: pointer;
+  }
   .slider_container {
     position: relative;
     height: 100vh;
@@ -407,6 +478,7 @@ html{
     align-items: center;
     max-width: 50%;
     flex-wrap: wrap;
+    justify-content: center;
   }
   .slide {
     width:100%;
