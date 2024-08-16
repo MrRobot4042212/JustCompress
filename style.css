@@ -4,6 +4,7 @@
 
 html{
   font-family: 'montserrat', sans-serif;
+  scroll-behavior: smooth;
 }
 
 @media (max-width: 1729px){
@@ -234,16 +235,60 @@ html{
   .slider_container {
     position: relative;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    max-width: 100%;
     flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
-  .slide {
-    width:100%;
+  .slider {
+    position: relative;
+    width: 400%;
     height: 100%;
-    object-fit:cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    animation: 30s cubic-bezier(1, 0.95, 0.565, 1) sliding infinite;
   }
+
+  .slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes sliding {
+    0% {
+      transform: translateX(0%);
+    }
+    20% {
+      transform: translateX(0%);
+    }
+    25% {
+      transform: translateX(-100%);
+    }
+    45% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(-200%);
+    }
+    70% {
+      transform: translateX(-200%);
+    }
+    75% {
+      transform: translateX(-300%);
+    }
+    95% {
+      transform: translateX(-300%);
+    }
+    100% {
+      transform: translateX(-400%);
+    }
+  }
+
+
 
   
 }
@@ -474,16 +519,58 @@ html{
   .slider_container {
     position: relative;
     height: 100vh;
-    display: flex;
-    align-items: center;
     max-width: 50%;
     flex-wrap: wrap;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
-  .slide {
-    width:100%;
+  .slider {
+    position: relative;
+    width: 400%;
     height: 100%;
-    object-fit:cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    animation: 30s cubic-bezier(1, 0.95, 0.565, 1) sliding infinite;
+  }
+
+  .slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @keyframes sliding {
+    0% {
+      transform: translateX(0%);
+    }
+    20% {
+      transform: translateX(0%);
+    }
+    25% {
+      transform: translateX(-100%);
+    }
+    45% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(-200%);
+    }
+    70% {
+      transform: translateX(-200%);
+    }
+    75% {
+      transform: translateX(-300%);
+    }
+    95% {
+      transform: translateX(-300%);
+    }
+    100% {
+      transform: translateX(-400%);
+    }
   }
 
 }
