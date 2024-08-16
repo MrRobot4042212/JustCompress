@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <title>JustCompress</title>
-      <link rel="stylesheet" crossorigin href="https://mrrobot4042212.github.io/JustCompress/assets/index-DIhxrMNj.css">
+      <link rel="stylesheet" crossorigin href="https://mrrobot4042212.github.io/JustCompress/assets/index-Bvb3V6Gy.css">
     </head>
-    <body>
+    <body id="body">
     <main>
         <section class="content">
             <form id="upload-form">
@@ -37,14 +37,14 @@
                         <option value="raw">RAW</option>
                         <option value="tiff">TIFF</option>
                     </select>
-                    <span id="toggleButton">
+                    <a draggable="false" href="" id="toggleButton">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5333d2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                             <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
                             <path d="M12 9h.01" />
                             <path d="M11 12h1v4h1" />
                         </svg>
-                    </span>
+                    </a>
                 </span>
 
                 <span class="buttonContainer">
@@ -82,8 +82,24 @@
             </footer>
         </section>
         <section class="slider_container">
-            <img class="slide" src="./1.webp" alt="foto de una luna azul" draggable="false">
+                <section class="slider">
+                    <img src="https://mrrobot4042212.github.io/JustCompress/1.webp" alt="" />
+                    <img src="https://mrrobot4042212.github.io/JustCompress/2.webp" alt="" />
+                    <img src="https://mrrobot4042212.github.io/JustCompress/3.webp" alt="" />
+                    <img src="https://mrrobot4042212.github.io/JustCompress/4.webp" alt="" />
+                    <img src="https://mrrobot4042212.github.io/JustCompress/5.webp" alt="" />
+                </section>
             <section class="compression-info" id="compression-info">
+                <a href="" style="cursor: pointer;" id="toggleButtonContainer">
+                    <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    style="margin: 10px;"
+                    class="icon icon-tabler icon-tabler-square-rounded-minus" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5333d2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M9 12h6" />
+                        <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                    </svg>
+                </a>
                 <h2>Image Compression Types</h2>
                 <ul>
                     <li><strong style="color:rgb(83, 51, 210) ;">WEBP:</strong> A modern image format that provides superior lossless and lossy compression for images on the web. <span style="color: blue; font-weight: bold;">(Recomended for web development)</span></li>
@@ -105,6 +121,7 @@
         const form = document.getElementById('upload-form');
         const resetButton = document.getElementById('resetButton');
         const toggleButton = document.getElementById('toggleButton');
+        const toggleButtonContainer = document.getElementById('toggleButtonContainer');
         let droppedFiles = [];
 
         dropZone.addEventListener('click', () => fileInput.click());
@@ -242,16 +259,37 @@
             });
         }
 
-        toggleButton.addEventListener('click', () => {
-            const compressionInfo = document.getElementById('compression-info');
-            if ( compressionInfo.style.opacity === '1' ) {
-                compressionInfo.style.opacity = '0';
-                compressionInfo.style.pointerEvents = 'none';
-            } else {
-                compressionInfo.style.opacity = '1';
-                compressionInfo.style.pointerEvents = 'all';
-            }
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        const compressionInfo = document.getElementById('compression-info');
+        if (toggleButton && compressionInfo) {
+            toggleButton.addEventListener('click', () => {
+                if (compressionInfo.style.opacity === '1') {
+                    compressionInfo.style.opacity = '0';
+                    compressionInfo.style.pointerEvents = 'none';
+                    toggleButton.setAttribute('href', '#body');
+                } else {
+                    compressionInfo.style.opacity = '1';
+                    compressionInfo.style.pointerEvents = 'all';
+                    toggleButton.setAttribute('href', '#compression-info');
+                }
+            });
+        }
+        if (toggleButtonContainer) {
+            toggleButtonContainer.addEventListener('click', () => {
+                if (compressionInfo.style.opacity === '1') {
+                    compressionInfo.style.opacity = '0';
+                    compressionInfo.style.pointerEvents = 'none';
+                    toggleButtonContainer.setAttribute('href', '#body');
+                } else {
+                    compressionInfo.style.opacity = '1';
+                    compressionInfo.style.pointerEvents = 'all';
+                    toggleButtonContainer.setAttribute('href', '#compression-info');
+                }
+            });
+        }
+    });
+    
+
 
     </script>
     </body>
