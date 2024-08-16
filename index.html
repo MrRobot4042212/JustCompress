@@ -1,14 +1,14 @@
-<!doctype html>
-<html lang="en">
-  <head>
+    <!doctype html>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="https://mrrobot4042212.github.io/JustCompress/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <title>JustCompress</title>
-    <link rel="stylesheet" crossorigin href="https://mrrobot4042212.github.io/JustCompress/assets/index-CjpohkGN.css">
-  </head>
-  <body>
+      <link rel="stylesheet" crossorigin href="https://mrrobot4042212.github.io/JustCompress/assets/index-DIhxrMNj.css">
+    </head>
+    <body>
     <main>
         <section class="content">
             <form id="upload-form">
@@ -23,18 +23,50 @@
                     <p class="textImg">Drag & Drop your images here or click to select.</p>
                 </div>
                 <label for="compression">Select compression type:</label>
-                <select id="compression" name="compression">
-                    <option value="webp">WEBP</option>
-                    <option value="jpeg">JPEG</option>
-                    <option value="png">PNG</option>
-                    <option value="bmp">BMP</option>
-                    <option value="gif">GIF</option>
-                    <option value="raw">RAW</option>
-                    <option value="tiff">TIFF</option>
-                </select>
+                <span style="display: flex;
+                gap: 20px;
+                align-content: center;
+                flex-wrap: wrap;
+                align-items: center;">
+                    <select id="compression" name="compression">
+                        <option value="webp">WEBP</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="png">PNG</option>
+                        <option value="bmp">BMP</option>
+                        <option value="gif">GIF</option>
+                        <option value="raw">RAW</option>
+                        <option value="tiff">TIFF</option>
+                    </select>
+                    <span id="toggleButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#5333d2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                            <path d="M12 9h.01" />
+                            <path d="M11 12h1v4h1" />
+                        </svg>
+                    </span>
+                </span>
+
                 <span class="buttonContainer">
-                <button type="submit">Get my files compressed!</button>
-                <button type="reset" id="resetButton">Start again</button>
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-download" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+                        <path d="M12 17v-6" />
+                        <path d="M9.5 14.5l2.5 2.5l2.5 -2.5" />
+                        </svg>
+                    Get my files compressed!</button>
+                <button type="reset" id="resetButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M4 7l16 0" />
+                        <path d="M10 11l0 6" />
+                        <path d="M14 11l0 6" />
+                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                        </svg>
+                    Clean all images</button>
                 </span>
             </form>
             <footer>
@@ -51,150 +83,176 @@
         </section>
         <section class="slider_container">
             <img class="slide" src="./1.webp" alt="foto de una luna azul" draggable="false">
+            <section class="compression-info" id="compression-info">
+                <h2>Image Compression Types</h2>
+                <ul>
+                    <li><strong style="color:rgb(83, 51, 210) ;">WEBP:</strong> A modern image format that provides superior lossless and lossy compression for images on the web. <span style="color: blue; font-weight: bold;">(Recomended for web development)</span></li>
+                    <li><strong style="color:rgb(83, 51, 210) ;">JPEG:</strong> A commonly used method of lossy compression for digital images, particularly for those images produced by digital photography.</li>
+                    <li><strong style="color:rgb(83, 51, 210) ;">PNG:</strong> A raster-graphics file format that supports lossless data compression.</li>
+                    <li><strong style="color:rgb(83, 51, 210) ;">BMP:</strong> A raster graphics image file format used to store bitmap digital images, independently of the display device.</li>
+                    <li><strong style="color:rgb(83, 51, 210) ;">GIF:</strong> A bitmap image format that supports both animated and static images.</li>
+                    <li><strong style="color:rgb(83, 51, 210) ;">RAW:</strong> A raw image format contains minimally processed data from the image sensor of a digital camera or image scanner.</li>
+                    <li><strong style="color:rgb(83, 51, 210) ;">TIFF:</strong> A flexible, adaptable file format for handling images and data within a single file, by including the header tags (size, definition, image-data arrangement, applied image compression).</li>
+                </ul>
+            </section>
         </section>
+
     </main>
 
     <script>
-      const dropZone = document.getElementById('drop-zone');
-      const fileInput = document.getElementById('file');
-      const form = document.getElementById('upload-form');
-      const resetButton = document.getElementById('resetButton');
-      let droppedFiles = [];
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file');
+        const form = document.getElementById('upload-form');
+        const resetButton = document.getElementById('resetButton');
+        const toggleButton = document.getElementById('toggleButton');
+        let droppedFiles = [];
 
-      dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('click', () => fileInput.click());
 
-      fileInput.addEventListener('change', (e) => {
-          handleFiles(e.target.files);
-      });
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
 
-      dropZone.addEventListener('dragover', (e) => {
-          e.preventDefault();
-          dropZone.classList.add('dragover');
-      });
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
 
-      dropZone.addEventListener('dragleave', () => {
-          dropZone.classList.remove('dragover');
-      });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
 
-      dropZone.addEventListener('drop', (e) => {
-          e.preventDefault();
-          dropZone.classList.remove('dragover');
-          handleFiles(e.dataTransfer.files);
-      });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
 
-      resetButton.addEventListener('click', () => {
-          dropZone.innerHTML = 'Drag & Drop your images here or click to select';
-          droppedFiles = [];
-      });
+        resetButton.addEventListener('click', () => {
+            dropZone.innerHTML = 'Drag & Drop your images here or click to select';
+            droppedFiles = [];
+        });
 
-      function handleFiles(files) {
-          dropZone.innerHTML = '';
-          droppedFiles = files;
-          Array.from(files).forEach(file => {
-              if (file && file.type.startsWith('image/')) {
-                  const reader = new FileReader();
-                  reader.onload = (e) => {
-                      const img = document.createElement('img');
-                      img.src = e.target.result;
-                      dropZone.appendChild(img);
-                  };
-                  reader.readAsDataURL(file);
-              } else {
-                  alert('Please upload a valid image file.');
-              }
-          });
-      }
+        function handleFiles(files) {
+            dropZone.innerHTML = '';
+            droppedFiles = files;
+            Array.from(files).forEach(file => {
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        dropZone.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    alert('Please upload a valid image file.');
+                }
+            });
+        }
 
-      form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-          const files = droppedFiles.length ? droppedFiles : fileInput.files;
-          const compressionType = document.getElementById('compression').value;
-          const compressedFiles = await compressImages(files, compressionType);
-          downloadCompressedFiles(compressedFiles);
-      });
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const files = droppedFiles.length ? droppedFiles : fileInput.files;
+            const compressionType = document.getElementById('compression').value;
+            const compressedFiles = await compressImages(files, compressionType);
+            downloadCompressedFiles(compressedFiles);
+        });
 
-      async function compressImages(files, compressionType) {
-          const compressedFiles = [];
-          for (const file of files) {
-              const compressedFile = await compressImage(file, compressionType);
-              compressedFiles.push(compressedFile);
-          }
-          return compressedFiles;
-      }
+        async function compressImages(files, compressionType) {
+            const compressedFiles = [];
+            for (const file of files) {
+                const compressedFile = await compressImage(file, compressionType);
+                compressedFiles.push(compressedFile);
+            }
+            return compressedFiles;
+        }
 
-      function compressImage(file, compressionType) {
-          return new Promise((resolve, reject) => {
-              const reader = new FileReader();
-              reader.onload = (e) => {
-                  const img = new Image();
-                  img.onload = () => {
-                      const canvas = document.createElement('canvas');
-                      const ctx = canvas.getContext('2d');
-                      canvas.width = img.width;
-                      canvas.height = img.height;
-                      ctx.drawImage(img, 0, 0);
-                      let mimeType;
-                      switch (compressionType) {
-                          case 'webp':
-                              mimeType = 'image/webp';
-                              break;
-                          case 'jpeg':
-                              mimeType = 'image/jpeg';
-                              break;
-                          case 'png':
-                              mimeType = 'image/png';
-                              break;
-                          case 'bmp':
-                              mimeType = 'image/bmp';
-                              break;
-                          case 'gif':
-                              mimeType = 'image/gif';
-                              break;
-                          case 'raw':
-                              mimeType = 'image/raw';
-                              break;
-                          case 'tiff':
-                              mimeType = 'image/tiff';
-                              break;
-                          default:
-                              mimeType = 'image/png';
-                      }
-                      canvas.toBlob((blob) => {
-                          const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, `.${compressionType}`), {
-                              type: mimeType
-                          });
-                          resolve(compressedFile);
-                      }, mimeType);
-                  };
-                  img.src = e.target.result;
-              };
-              reader.readAsDataURL(file);
-          });
-      }
+        function compressImage(file, compressionType) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        let mimeType;
+                        switch (compressionType) {
+                            case 'webp':
+                                mimeType = 'image/webp';
+                                break;
+                            case 'jpeg':
+                                mimeType = 'image/jpeg';
+                                break;
+                            case 'png':
+                                mimeType = 'image/png';
+                                break;
+                            case 'bmp':
+                                mimeType = 'image/bmp';
+                                break;
+                            case 'gif':
+                                mimeType = 'image/gif';
+                                break;
+                            case 'raw':
+                                mimeType = 'image/raw';
+                                break;
+                            case 'tiff':
+                                mimeType = 'image/tiff';
+                                break;
+                            default:
+                                mimeType = 'image/png';
+                        }
+                        canvas.toBlob((blob) => {
+                            const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, `.${compressionType}`), {
+                                type: mimeType
+                            });
+                            resolve(compressedFile);
+                        }, mimeType);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
 
-      async function downloadCompressedFiles(files) {
-          const zip = new JSZip();
-          const imgFolder = zip.folder("images");
-          if (!files.length) {
-              alert('No files to download.');
-              return;
-          }
-          for (const file of files) {
-              const arrayBuffer = await file.arrayBuffer();
-              imgFolder.file(file.name, arrayBuffer);
-          }
+        async function downloadCompressedFiles(files) {
+            const zip = new JSZip();
+            const imgFolder = zip.folder("images");
+            if (!files.length) {
+                alert('No files to download.');
+                return;
+            }
+            for (const file of files) {
+                const arrayBuffer = await file.arrayBuffer();
+                imgFolder.file(file.name, arrayBuffer);
+            }
 
-          zip.generateAsync({ type: "blob" }).then((content) => {
-              const url = window.URL.createObjectURL(content);
-              const a = document.createElement('a');
-              a.style.display = 'none';
-              a.href = url;
-              a.download = 'compressed_images.zip';
-              document.body.appendChild(a);
-              a.click();
-              window.URL.revokeObjectURL(url);
-          });
-      }
+            zip.generateAsync({ type: "blob" }).then((content) => {
+                const url = window.URL.createObjectURL(content);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = 'compressed_images.zip';
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+            });
+        }
+
+        toggleButton.addEventListener('click', () => {
+            const compressionInfo = document.getElementById('compression-info');
+            if ( compressionInfo.style.opacity === '1' ) {
+                compressionInfo.style.opacity = '0';
+                compressionInfo.style.pointerEvents = 'none';
+            } else {
+                compressionInfo.style.opacity = '1';
+                compressionInfo.style.pointerEvents = 'all';
+            }
+        });
+
     </script>
-  </body>
-</html>
+    </body>
+    </html>
