@@ -34,9 +34,6 @@
                         <option value="webp">WEBP</option>
                         <option value="jpeg">JPEG</option>
                         <option value="png">PNG</option>
-                        <option value="bmp">BMP</option>
-                        <option value="gif">GIF</option>
-                        <option value="raw">RAW</option>
                         <option value="tiff">TIFF</option>
                     </select>
                     <a draggable="false" href="" id="toggleButton">
@@ -48,6 +45,62 @@
                         </svg>
                     </a>
                 </span>
+                <span class="showOptions">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M4 6l8 0" />
+                        <path d="M16 6l4 0" />
+                        <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M4 12l2 0" />
+                        <path d="M10 12l10 0" />
+                        <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M4 18l11 0" />
+                        <path d="M19 18l1 0" />
+                    </svg>
+                    <a style="color: #fff; font-size: 14px;">Show more options</a>
+                </span>
+                <section class="options">
+                    <span class="inputContainer">
+                        <label for="quality">Quality:</label>
+                        <input type="range" id="quality" name="quality" min="0" max="100" value="80" />
+                        <p id="qualityValue"></p>
+                    </span>
+                    <span class="inputContainer" >
+                        <label for="compressionRange">Compression:</label>
+                        <input type="range" id="compressionRange" name="compressionRange" min="0" max="100" value="100" />
+                        <p id="compressionValue"></p>
+                    </span>
+                    <span class="inputContainer">
+                        <input type="checkbox" id="resolution" name="resolution" checked/>
+                        <label for="resolution">Keep original resolution</label>
+                    </span>
+                    <span class="inputContainer">
+                        <label for="width">Width resolution</label>
+                        <select name="width" id="widthResolution" disabled>
+                            <option value="3840">3840</option>
+                            <option value="2560">2560</option>
+                            <option value="1920">1920</option>
+                            <option value="1280">1280</option>
+                            <option value="1024">1024</option>
+                            <option value="800">800</option>
+                            <option value="640">640</option>
+                            <option value="320">320</option>
+                        </select>
+                        <label for="height">Height resolution</label>
+                        <select name="height" id="heightResolution" disabled>
+                            <option value="2160">2160</option>
+                            <option value="1440">1440</option>
+                            <option value="1080">1080</option>
+                            <option value="720">720</option>
+                            <option value="576">576</option>
+                            <option value="480">480</option>
+                            <option value="360">360</option>
+                            <option value="240">240</option>
+                        </select>
+                    </span>
+
+                </section>
 
                 <span class="buttonContainer">
                 <button type="submit">
@@ -118,14 +171,38 @@
     </main>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file');
         const form = document.getElementById('upload-form');
         const resetButton = document.getElementById('resetButton');
         const toggleButton = document.getElementById('toggleButton');
         const toggleButtonContainer = document.getElementById('toggleButtonContainer');
+        const qualityValue = document.getElementById('qualityValue');
+        const compressionValue = document.getElementById('compressionValue');
+        const qualityRange = document.getElementById('quality');
+        const compressionRange = document.getElementById('compressionRange');
+        const showOptions = document.querySelector('.showOptions');
+        const options = document.querySelector('.options');
+        const quality = document.getElementById('quality').value;
+        const compression = document.getElementById('compressionRange').value;
+        const widthSelected = document.getElementById('widthResolution').value;
+        const heightSelected = document.getElementById('heightResolution').value;
+        const orginalResolution = document.getElementById('resolution').checked;
         let droppedFiles = [];
+        qualityValue.textContent = qualityRange.value + '%';
+        compressionValue.textContent = compressionRange.value  + '%';
 
+        
+        qualityRange.addEventListener('input', () => {
+            qualityValue.textContent = qualityRange.value + '%';
+        });
+        compressionRange.addEventListener('input', () => {
+            compressionValue.textContent = compressionRange.value + '%';
+        });
+
+        
         dropZone.addEventListener('click', () => fileInput.click());
 
         fileInput.addEventListener('change', (e) => {
@@ -174,71 +251,77 @@
         }
 
         form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const files = droppedFiles.length ? droppedFiles : fileInput.files;
-            const compressionType = document.getElementById('compression').value;
-            const compressedFiles = await compressImages(files, compressionType);
-            downloadCompressedFiles(compressedFiles);
-        });
+        e.preventDefault();
+        const files = droppedFiles.length ? droppedFiles : fileInput.files;
+        const compressionType = document.getElementById('compression').value;
+        const quality = document.getElementById('quality').value;
+        const compression = document.getElementById('compressionRange').value;
+        const widthSelected = document.getElementById('widthResolution').value;
+        const heightSelected = document.getElementById('heightResolution').value;
+        const originalResolution = document.getElementById('resolution').checked;
 
-        async function compressImages(files, compressionType) {
-            const compressedFiles = [];
-            for (const file of files) {
-                const compressedFile = await compressImage(file, compressionType);
-                compressedFiles.push(compressedFile);
-            }
-            return compressedFiles;
+        const compressedFiles = await compressImages(files, compressionType, quality, compression, widthSelected, heightSelected, originalResolution);
+        downloadCompressedFiles(compressedFiles);
+    });
+
+    async function compressImages(files, compressionType, quality, compression, width, height, originalResolution) {
+        const compressedFiles = [];
+        for (const file of files) {
+            const compressedFile = await compressImage(file, compressionType, quality, compression, width, height, originalResolution);
+            compressedFiles.push(compressedFile);
         }
+        return compressedFiles;
+    }
 
-        function compressImage(file, compressionType) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = new Image();
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        canvas.width = img.width;
-                        canvas.height = img.height;
-                        ctx.drawImage(img, 0, 0);
-                        let mimeType;
-                        switch (compressionType) {
-                            case 'webp':
-                                mimeType = 'image/webp';
-                                break;
-                            case 'jpeg':
-                                mimeType = 'image/jpeg';
-                                break;
-                            case 'png':
-                                mimeType = 'image/png';
-                                break;
-                            case 'bmp':
-                                mimeType = 'image/bmp';
-                                break;
-                            case 'gif':
-                                mimeType = 'image/gif';
-                                break;
-                            case 'raw':
-                                mimeType = 'image/raw';
-                                break;
-                            case 'tiff':
-                                mimeType = 'image/tiff';
-                                break;
-                            default:
-                                mimeType = 'image/png';
-                        }
-                        canvas.toBlob((blob) => {
+    function compressImage(file, compressionType, quality, compression, width, height, originalResolution) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                if (originalResolution) {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                } else {
+                    canvas.width = width || img.width;
+                    canvas.height = height || img.height;
+                }
+
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                let mimeType;
+                switch (compressionType) {
+                    case 'webp':
+                        mimeType = 'image/webp';
+                        break;
+                    case 'jpeg':
+                        mimeType = 'image/jpeg';
+                        break;
+                    case 'png':
+                        mimeType = 'image/png';
+                        break;
+                    case 'tiff':
+                        mimeType = 'image/tiff';
+                        break;
+                    default:
+                        mimeType = 'image/jpeg';
+                }
+
+                canvas.toBlob((blob) => {
                             const compressedFile = new File([blob], file.name.replace(/\.[^/.]+$/, `.${compressionType}`), {
                                 type: mimeType
                             });
                             resolve(compressedFile);
-                        }, mimeType);
-                    };
-                    img.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            });
-        }
+                        }, mimeType,quality / 100);
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
 
         async function downloadCompressedFiles(files) {
             const zip = new JSZip();
@@ -264,7 +347,6 @@
             });
         }
 
-    document.addEventListener('DOMContentLoaded', () => {
         const compressionInfo = document.getElementById('compression-info');
         if (toggleButton && compressionInfo) {
             toggleButton.addEventListener('click', () => {
@@ -292,6 +374,49 @@
                 }
             });
         }
+        if (showOptions && options) {
+            showOptions.addEventListener('click', () => {
+                if (options.style.opacity === '1') {
+                    options.style.opacity = '0';
+                    options.style.pointerEvents = 'none';
+                    options.style.display = 'none';
+                    showOptions.children[0].innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M14 6m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M4 6l8 0" />
+                    <path d="M16 6l4 0" />
+                    <path d="M8 12m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M4 12l2 0" />
+                    <path d="M10 12l10 0" />
+                    <path d="M17 18m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M4 18l11 0" />
+                    <path d="M19 18l1 0" />
+                    </svg>`;
+
+                } else {
+                    options.style.opacity = '1';
+                    options.style.pointerEvents = 'all';
+                    options.style.display = 'flex';
+                        showOptions.children[0].innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minimize" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M15 19v-2a2 2 0 0 1 2 -2h2" />
+                        <path d="M15 5v2a2 2 0 0 0 2 2h2" />
+                        <path d="M5 15h2a2 2 0 0 1 2 2v2" />
+                        <path d="M5 9h2a2 2 0 0 0 2 -2v-2" />
+                        </svg>`;
+                }
+            });
+        }
+
+        document.getElementById('resolution').addEventListener('change', () => {
+            if (document.getElementById('resolution').checked){
+                document.getElementById('widthResolution').disabled = true;
+                document.getElementById('heightResolution').disabled = true;
+            } else {
+                document.getElementById('widthResolution').disabled = false;
+                document.getElementById('heightResolution').disabled = false;
+            }
+        });
     });
     
 

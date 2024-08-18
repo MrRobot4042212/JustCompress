@@ -148,8 +148,6 @@ html{
       text-align: center;
       margin: 20px 10px;
       cursor: pointer;
-  
-      
   }
   .drop-zone.dragover {
       border-color: #000;
@@ -235,6 +233,51 @@ html{
     color: rgb(86, 54, 211);
     margin: 0;
 
+  }
+  .showOptions{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background:rgb(83, 51, 210);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .showOptions:hover {
+    background: rgba(0, 0, 255, 1);
+    transform: scale(1.02);
+  }
+  .options{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border:rgb(83, 51, 210) 2px solid;
+    box-shadow: rgb(83, 51, 210) 0px 0px 10px;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    max-width: 200px;
+    transition: all 0.5s ease;
+  }
+  .inputContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .options input{
+    accent-color: rgb(83, 51, 210);
   }
   .slider_container {
     position: relative;
@@ -362,6 +405,7 @@ html{
     font-size: 20px;
     color: #000;
     text-align: start;
+    padding: 10px 0px ;
   }
   ul{
     padding: 0;
@@ -518,7 +562,6 @@ html{
     box-shadow: 0 0 20px 20px rgb(83, 51, 210,0.2);
     transition: all 0.5s ease;
     opacity: 0;
-    
   }
   .compression-info h2{
     font-size: 28px;
@@ -550,9 +593,59 @@ html{
     height: 100%;
     object-fit: cover;
   }
+  .showOptions{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background:rgb(83, 51, 210);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 
+  }
+  .showOptions:hover {
+    background: rgba(0, 0, 255, 1);
+    transform: scale(1.02);
+  }
+  .options{
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border:rgb(83, 51, 210,0.5) 2px solid;
+    box-shadow: rgb(83, 51, 210) 0px 0px 50px 10px;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    transition: all 0.5s ease;
+    max-width: 800px;
+    z-index: 3;
+    backdrop-filter: blur(200px);
+    background: transparent;
+  }
 
+  .options input{
+    accent-color: rgb(83, 51, 210);
+  }
 
+  .inputContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
   @keyframes sliding {
     0% {
       transform: translateX(0%);
