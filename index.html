@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <title>JustCompress</title>
-      <link rel="stylesheet" crossorigin href="https://mrrobot4042212.github.io/JustCompress/assets/index-BMTNizq1.css">
+      <link rel="stylesheet" crossorigin href="https://mrrobot4042212.github.io/JustCompress/assets/index-DR067vzX.css">
     </head>
     <body id="body">
     <main>
@@ -58,7 +58,7 @@
                         <path d="M4 18l11 0" />
                         <path d="M19 18l1 0" />
                     </svg>
-                    <a style="color: #fff; font-size: 14px;">Show more options</a>
+                    <button type="button">Show more options</button>
                 </span>
                 <section class="options">
                     <span class="inputContainer">
@@ -104,7 +104,7 @@
 
                 <span class="buttonContainer">
                 <button type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-download" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-download" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M14 3v4a1 1 0 0 0 1 1h4" />
                         <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
@@ -113,7 +113,7 @@
                         </svg>
                     Get my files compressed!</button>
                 <button type="reset" id="resetButton">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <path d="M4 7l16 0" />
                         <path d="M10 11l0 6" />
@@ -137,12 +137,17 @@
             </footer>
         </section>
         <section class="slider_container">
+            <label style="left: 0;" class="typeOfImage" for="originalImage">Original Image</label>
                 <section class="slider">
                     <img draggable="false" src="https://mrrobot4042212.github.io/JustCompress/1.webp" alt="" />
                     <img draggable="false" src="https://mrrobot4042212.github.io/JustCompress/2.webp" alt="" />
                     <img draggable="false" src="https://mrrobot4042212.github.io/JustCompress/3.webp" alt="" />
                     <img draggable="false" src="https://mrrobot4042212.github.io/JustCompress/4.webp" alt="" />
                     <img draggable="false" src="https://mrrobot4042212.github.io/JustCompress/5.webp" alt="" />
+                </section>
+                <label style="right: 0;" class="typeOfImage" for="previewImage">Preview Image</label>
+                <section class="previewImage" id="previewImage">
+                <h1>Preview</h1>
                 </section>
             <section class="compression-info" id="compression-info">
                 <a href="" style="cursor: pointer;" id="toggleButtonContainer">
@@ -160,11 +165,13 @@
                     <li><strong style="color:rgb(83, 51, 210) ;">WEBP:</strong> A modern image format that provides superior lossless and lossy compression for images on the web. <span style="color: blue; font-weight: bold;">(Recomended for web development)</span></li>
                     <li><strong style="color:rgb(83, 51, 210) ;">JPEG:</strong> A commonly used method of lossy compression for digital images, particularly for those images produced by digital photography.</li>
                     <li><strong style="color:rgb(83, 51, 210) ;">PNG:</strong> A raster-graphics file format that supports lossless data compression.</li>
-                    <li><strong style="color:rgb(83, 51, 210) ;">BMP:</strong> A raster graphics image file format used to store bitmap digital images, independently of the display device.</li>
-                    <li><strong style="color:rgb(83, 51, 210) ;">GIF:</strong> A bitmap image format that supports both animated and static images.</li>
-                    <li><strong style="color:rgb(83, 51, 210) ;">RAW:</strong> A raw image format contains minimally processed data from the image sensor of a digital camera or image scanner.</li>
                     <li><strong style="color:rgb(83, 51, 210) ;">TIFF:</strong> A flexible, adaptable file format for handling images and data within a single file, by including the header tags (size, definition, image-data arrangement, applied image compression).</li>
                 </ul>
+            </section>
+            <section class="imgArrayContainer">
+                <label for="imgArray" style="color: #fff;">Select your image</label>
+                <select name="imgArray" id="imgArray">
+                </select>
             </section>
         </section>
 
@@ -172,7 +179,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
+        // GLOBAL VARIABLES
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('file');
         const form = document.getElementById('upload-form');
@@ -190,7 +197,17 @@
         const widthSelected = document.getElementById('widthResolution').value;
         const heightSelected = document.getElementById('heightResolution').value;
         const orginalResolution = document.getElementById('resolution').checked;
+        const imgArray = document.getElementById('imgArray');
+        const slider = document.querySelector('.slider');
+        const imgArrayContainer = document.querySelector('.imgArrayContainer');
+        const previewImage = document.getElementById('previewImage');
+        const originalImg = document.querySelector('.originalImg');
+        const typeOfImage = document.querySelectorAll('.typeOfImage');
+        
+        imgArrayContainer.style.display = 'none';
         let droppedFiles = [];
+        let images = [];
+
         qualityValue.textContent = qualityRange.value + '%';
         compressionValue.textContent = compressionRange.value  + '%';
 
@@ -230,25 +247,107 @@
                         <p class="textImg">Drag & Drop your images here or click to select.</p>
                     </span>`;
             droppedFiles = [];
+            imgArray.innerHTML = '';
+            images = [];
+            imgArrayContainer.style.display = 'none';
+            slider.classList.add('slider');
+            slider.classList.remove('originalImg');
+            slider.innerHTML = `
+                    <img draggable="false" src="/JustCompress/1.webp" alt="" />
+                    <img draggable="false" src="/JustCompress/2.webp" alt="" />
+                    <img draggable="false" src="/JustCompress/3.webp" alt="" />
+                    <img draggable="false" src="/JustCompress/4.webp" alt="" />
+                    <img draggable="false" src="/JustCompress/5.webp" alt="" />
+            `;
+            typeOfImage.forEach(function(type) {
+                type.style.display = 'none';
+            });
+            previewImage.style.display = 'none';
         });
 
         function handleFiles(files) {
-            dropZone.innerHTML = '';
-            droppedFiles = files;
-            Array.from(files).forEach(file => {
-                if (file && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        dropZone.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
+    dropZone.innerHTML = '';
+    droppedFiles = files;
+    imgArray.innerHTML = '';
+    images = [];
+
+    Array.from(files).forEach(file => {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                dropZone.appendChild(img);
+
+                imgArray.innerHTML += `<option value="${file.name}">${file.name}</option>`;
+            
+                images.push(e.target.result);
+
+                if (imgArray.children.length > 0) {
+                    imgArrayContainer.style.display = 'flex';
+                    slider.innerHTML = `<img draggable="false" src="${images[0]}" alt="" />`;
+                    previewImage.innerHTML = `<img draggable="false" src="${images[0]}" alt="" />`;
+                    previewImage.style.display = 'flex';
+                    typeOfImage.forEach(function(type) {
+                        type.style.display = 'block';
+                    });
+                    slider.classList.add('originalImg');
+                    slider.classList.remove('slider');
                 } else {
-                    alert('Please upload a valid image file.');
+                    slider.classList.add('slider');
+                    slider.classList.remove('originalImg');
+                    typeOfImage.forEach(function(type) {
+                        type.style.display = 'none';
+                    });
                 }
-            });
+
+                // Add event listener to quality input
+                const qualityInput = document.getElementById('quality');
+                qualityInput.addEventListener('input', () => {
+                    const selectedIndex = imgArray.selectedIndex;
+                    const selectedImage = images[selectedIndex];
+                    updatePreviewImage(selectedImage, qualityInput.value);
+                });
+
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            alert('Please upload a valid image file.');
         }
+    });
+}
+
+function updatePreviewImage(imageSrc, quality) {
+    const img = new Image();
+    img.src = imageSrc;
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+        canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            previewImage.innerHTML = `<img draggable="false" src="${url}" alt="" />`;
+        }, 'image/jpeg', quality / 100);
+    };
+}
+
+
+
+imgArray.addEventListener('change', function() {
+    const selectedIndex = imgArray.selectedIndex;
+    const selectedImage = images[selectedIndex];
+    slider.innerHTML = `<img draggable="false" src="${selectedImage}" alt="" />`;
+    previewImage.innerHTML = `<img draggable="false" src="${selectedImage}" alt="" />`;
+
+    const qualityInput = document.getElementById('quality');
+    qualityInput.addEventListener('input', () => {
+        updatePreviewImage(selectedImage, qualityInput.value);
+    });
+});
 
         form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -418,6 +517,7 @@
             }
         });
     });
+
     
 
 
