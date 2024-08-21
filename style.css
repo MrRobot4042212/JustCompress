@@ -332,6 +332,7 @@ html{
       justify-content: space-between;
       text-align: center;
       background-position: center;
+      display: none;
     }
 
 
@@ -699,6 +700,8 @@ html{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    display: none;
+
   }
   .showOptions{
     padding: 5px 10px;
